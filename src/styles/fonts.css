@@ -1,0 +1,16 @@
+/* Tema fontları — sistem fontlarına dayanır, harici asset yok. */
+
+:root {
+  --font-xp: Tahoma, "Segoe UI", Geneva, Verdana, sans-serif;
+  --font-ios: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.shell-xp {
+  font-family: var(--font-xp);
+  font-size: 11px;
+}
+
+.shell-ios {
+  font-family: var(--font-ios);
+  font-size: 15px;
+}

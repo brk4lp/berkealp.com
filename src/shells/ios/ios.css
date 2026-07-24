@@ -1,0 +1,681 @@
+/* ===== iOS 5 (skeuomorphic) kabuğu ===== */
+
+.ios-home {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  color: #fff;
+  /* Linen dokusu benzeri koyu arka plan (telifsiz, CSS ile). */
+  background-color: #1c1f26;
+  background-image: radial-gradient(
+      ellipse at 50% 0%,
+      rgba(90, 110, 150, 0.35),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  user-select: none;
+}
+
+/* ===== iOS boot ekranı ===== */
+.ios-boot {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  background: #000;
+}
+.ios-boot-logo {
+  position: relative;
+  width: 74px;
+  height: 82px;
+  background: #e9e9ea;
+  border-radius: 50% 50% 48% 48% / 42% 42% 58% 58%;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+}
+.ios-boot-logo::before {
+  /* yaprak */
+  content: '';
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  width: 20px;
+  height: 22px;
+  background: #e9e9ea;
+  border-radius: 0 100% 0 100%;
+  transform: rotate(20deg);
+}
+.ios-boot-bite {
+  position: absolute;
+  top: 26px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  background: #000;
+  border-radius: 50%;
+}
+.ios-boot-spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  animation: ios-spin 0.8s linear infinite;
+}
+@keyframes ios-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ios-boot-spinner {
+    animation-duration: 1.4s;
+  }
+}
+
+/* ===== iOS kilit ekranı ===== */
+.ios-lock {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  user-select: none;
+  background: linear-gradient(to bottom, #1b3a63 0%, #24597f 45%, #3f7fa3 100%);
+}
+.ios-lock-clock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 46px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+.ios-lock-time {
+  font-size: 76px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.ios-lock-date {
+  font-size: 20px;
+  margin-top: 8px;
+}
+.ios-lock-slider {
+  padding: 0 16px 30px;
+}
+.ios-slider-track {
+  position: relative;
+  height: 58px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.ios-slider-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.7);
+  /* parlayan animasyon */
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.3) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ios-shimmer 2s linear infinite;
+  pointer-events: none;
+}
+@keyframes ios-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+.ios-slider-knob {
+  position: relative;
+  z-index: 2;
+  width: 54px;
+  height: 50px;
+  margin: 0 4px;
+  flex: none;
+  border-radius: 26px;
+  font-size: 26px;
+  color: #444;
+  background: linear-gradient(to bottom, #fff, #d8dade);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  touch-action: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ios-slider-label {
+    animation: none;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* ===== Durum çubuğu ===== */
+.ios-statusbar {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(to bottom, #4c4c4c, #1a1a1a);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.ios-statusbar.dark {
+  color: #fff;
+}
+.sb-left,
+.sb-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+.sb-right {
+  justify-content: flex-end;
+}
+.sb-center {
+  flex: none;
+}
+.sb-signal {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 12px;
+}
+.sb-signal i {
+  width: 3px;
+  background: #fff;
+  border-radius: 1px;
+  display: block;
+}
+.sb-carrier {
+  font-size: 11px;
+}
+.sb-wifi {
+  position: relative;
+  width: 14px;
+  height: 12px;
+}
+.wifi-arc {
+  position: absolute;
+  left: 50%;
+  border: 2px solid #fff;
+  border-bottom: none;
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%);
+}
+.wifi-arc.a1 {
+  width: 14px;
+  height: 7px;
+  top: 0;
+}
+.wifi-arc.a2 {
+  width: 8px;
+  height: 4px;
+  top: 3px;
+}
+.wifi-dot {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+.sb-pct {
+  font-size: 11px;
+}
+.sb-battery {
+  position: relative;
+  width: 22px;
+  height: 11px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  padding: 1px;
+}
+.sb-battery::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 5px;
+  background: #fff;
+  border-radius: 0 1px 1px 0;
+}
+.batt-fill {
+  display: block;
+  height: 100%;
+  background: #6cd36c;
+  border-radius: 1px;
+}
+
+/* ===== Springboard (ana ekran) ===== */
+.ios-springboard {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 44px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.ios-springboard.pushed {
+  transform: scale(0.92);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== Pager (çok sayfalı) ===== */
+.ios-pager-viewport {
+  flex: 1;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.ios-pager-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.ios-page {
+  flex: 0 0 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ios-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-content: start;
+  gap: 18px 6px;
+  padding: 22px 14px 0;
+}
+
+/* iki sütuna düş (dar telefonlar) */
+@media (max-width: 360px) {
+  .ios-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ios-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.ios-app-tile {
+  position: relative;
+  width: 57px;
+  height: 57px;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.ios-app-gloss {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.05)
+  );
+  border-radius: 13px 13px 40% 40% / 13px 13px 18px 18px;
+  pointer-events: none;
+}
+.ios-app-glyph {
+  position: absolute;
+  inset: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+.ios-app-label {
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  max-width: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ios-page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 0;
+}
+.ios-page-dots .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ios-page-dots .dot.active {
+  background: #fff;
+}
+.ios-page-dots .dot.search {
+  width: 12px;
+  height: 12px;
+  font-size: 9px;
+  background: transparent;
+  filter: grayscale(1) brightness(1.6);
+  opacity: 0.5;
+}
+.ios-page-dots .dot.search.active {
+  opacity: 1;
+}
+
+/* ===== Dock ===== */
+.ios-dock {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 8px;
+  padding: 10px 12px 8px;
+  border-radius: 18px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.08)
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(6px);
+}
+.dock-app .ios-app-tile {
+  width: 52px;
+  height: 52px;
+}
+.dock-mail {
+  background: linear-gradient(to bottom, #4aa3ea, #1f6fd0);
+}
+.dock-link {
+  background: linear-gradient(to bottom, #8e8e93, #5a5a5f);
+}
+.dock-glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Uygulama katmanı (ikondan zoom) ===== */
+.ios-app-layer {
+  position: absolute;
+  inset: 0;
+  bottom: 44px;
+  z-index: 50;
+}
+.ios-app-layer .ios-appview {
+  animation: ios-app-zoom 0.28s ease;
+}
+@keyframes ios-app-zoom {
+  from {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ios-app-layer .ios-appview {
+    animation-duration: 0.05s;
+  }
+}
+
+.ios-appview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #c8ccd4;
+}
+.ios-navbar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 17px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to bottom, #8ea0b8, #5b7091);
+  border-bottom: 1px solid #3f5069;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.ios-appview-body {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #dfe3e8;
+}
+
+/* ===== Home tuşu ===== */
+.ios-homebar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, #2a2d33, #17181c);
+  border-top: 1px solid #000;
+}
+.ios-home-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #3a3d44, #1a1c20);
+  border: 1px solid #000;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-square {
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+}
+.ios-home-button:active {
+  filter: brightness(0.8);
+}
+
+/* ===== Spotlight ===== */
+.ios-spotlight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  background: linear-gradient(to bottom, #2b2f36, #14161a);
+}
+.ios-spotlight-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.ios-spotlight-icon {
+  font-size: 15px;
+  opacity: 0.6;
+}
+.ios-spotlight-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: #111;
+}
+.ios-spotlight-results {
+  flex: 1;
+  margin-top: 12px;
+  overflow: auto;
+}
+.ios-spotlight-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+  padding: 11px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ios-spotlight-result-title {
+  font-size: 15px;
+  color: #fff;
+}
+.ios-spotlight-result-sub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.ios-spotlight-empty {
+  padding: 16px 6px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+.ios-sound-toggle {
+  align-self: center;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.ios-sound-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Links klasörü ===== */
+.ios-folder-tile {
+  background: rgba(120, 120, 128, 0.5);
+  backdrop-filter: blur(2px);
+}
+.ios-folder-grid {
+  position: absolute;
+  inset: 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+}
+.ios-folder-mini {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  overflow: hidden;
+}
+.ios-folder-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  animation: ios-fade 0.2s ease;
+}
+@keyframes ios-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.ios-folder-panel {
+  width: 86%;
+  max-width: 340px;
+  padding: 18px 16px;
+  border-radius: 16px;
+  background: rgba(40, 42, 48, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: ios-folder-pop 0.22s ease;
+}
+@keyframes ios-folder-pop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.ios-folder-title {
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+.ios-folder-apps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 6px;
+}
