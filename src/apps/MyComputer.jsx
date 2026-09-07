@@ -13,8 +13,6 @@ export default function MyComputer() {
 
   return (
     <div className="app-content my-computer">
-      <h1 className="section-title">My Computer</h1>
-
       <h2 className="mc-group">Hard Disk Drives</h2>
       <div className="mc-drives">
         {drives.map((d) => (

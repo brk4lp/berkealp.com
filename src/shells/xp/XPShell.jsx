@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { apps, getApp } from '../../data/apps.js'
+import { desktopApps as apps, getApp } from '../../data/apps.js'
 import { useWindowManager } from '../../hooks/useWindowManager.js'
 import { sound } from '../../lib/sound.js'
 import Window from './Window.jsx'

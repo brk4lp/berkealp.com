@@ -21,7 +21,7 @@ export default function About() {
 
       <p className="about-bio">{profile.bio}</p>
 
-      <h2 className="section-title">Skills</h2>
+      <h2 className="content-subtitle">Tools and interests</h2>
       <ul className="skill-list">
         {profile.skills.map((skill) => (
           <li key={skill} className="skill-chip">

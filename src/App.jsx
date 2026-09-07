@@ -5,7 +5,7 @@ import IOSShell from './shells/ios/IOSShell.jsx'
 /**
  * Viewport genişliğine göre kabuk seçer:
  *  - Geniş ekran (>= 768px) -> Windows XP masaüstü
- *  - Dar ekran  (< 768px)   -> iOS 5 ana ekranı
+ *  - Dar ekran  (< 768px)   -> klasik iOS esintili modern ana ekran
  */
 export default function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')

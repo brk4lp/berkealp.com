@@ -50,6 +50,11 @@ export default function LockScreen({ onUnlock }) {
     }
   }
 
+  const onPointerCancel = () => {
+    drag.current = null
+    setOffset(0)
+  }
+
   const time = now.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
@@ -85,6 +90,7 @@ export default function LockScreen({ onUnlock }) {
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
+            onPointerCancel={onPointerCancel}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 sound.unlock()

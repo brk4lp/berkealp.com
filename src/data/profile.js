@@ -1,22 +1,22 @@
-// Placeholder profile data — replace with real content.
 export const profile = {
-  name: 'Berke Alp',
-  title: 'Software Developer & Designer',
+  name: 'Berke Alp Kaya',
+  title: 'Mechatronics Engineering Student',
   location: 'Istanbul, Turkey',
-  bio: `Hi! I'm Berke. I'm interested in web technologies, user experience and retro interfaces.
-This site is an experiment: on desktop it behaves like a Windows XP desktop, on mobile like an iOS 5 home screen.`,
+  bio: `I'm a fourth-year Mechatronics Engineering student interested in automation, electronics and software.
+Most of my projects involve ESP32, Rust or Python. I'm also comfortable working with Git and Linux.`,
   skills: [
-    'JavaScript / TypeScript',
-    'React & Vite',
-    'Node.js',
-    'UI / UX Design',
-    'CSS & Animation',
+    'Automation',
+    'Electronics',
+    'ESP32',
+    'Rust',
+    'Python',
     'Git',
+    'Linux',
   ],
   email: 'berkealpkaya@gmail.com',
   cvUrl: '/cv-placeholder.pdf',
   social: [
-    { label: 'GitHub', url: 'https://github.com/', handle: '@berkealp' },
+    { label: 'GitHub', url: 'https://github.com/brk4lp', handle: '@brk4lp' },
     { label: 'LinkedIn', url: 'https://linkedin.com/', handle: 'Berke Alp' },
     { label: 'Twitter / X', url: 'https://x.com/', handle: '@berkealp' },
   ],

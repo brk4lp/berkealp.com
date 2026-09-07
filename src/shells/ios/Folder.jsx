@@ -16,12 +16,16 @@ export function FolderIcon({ onOpen }) {
           {links.slice(0, 4).map((l) => (
             <span
               key={l.id}
-              className="ios-folder-mini"
-              style={{
-                background: `linear-gradient(to bottom, ${l.tint[0]}, ${l.tint[1]})`,
-              }}
+              className={`ios-folder-mini${l.iosIcon ? ' has-artwork' : ''}`}
+              style={
+                l.iosIcon
+                  ? undefined
+                  : {
+                      background: `linear-gradient(to bottom, ${l.tint[0]}, ${l.tint[1]})`,
+                    }
+              }
             >
-              {l.letter}
+              {l.iosIcon ? <img src={l.iosIcon} alt="" /> : l.letter}
             </span>
           ))}
         </span>
@@ -46,13 +50,23 @@ export function FolderOverlay({ onClose }) {
               rel="noreferrer noopener"
             >
               <span
-                className="ios-app-tile"
-                style={{
-                  background: `linear-gradient(to bottom, ${l.tint[0]}, ${l.tint[1]})`,
-                }}
+                className={`ios-app-tile${l.iosIcon ? ' has-artwork' : ''}`}
+                style={
+                  l.iosIcon
+                    ? undefined
+                    : {
+                        background: `linear-gradient(to bottom, ${l.tint[0]}, ${l.tint[1]})`,
+                      }
+                }
               >
-                <span className="ios-app-gloss" aria-hidden="true" />
-                <span className="dock-glyph">{l.letter}</span>
+                {l.iosIcon ? (
+                  <img className="ios-app-artwork" src={l.iosIcon} alt="" />
+                ) : (
+                  <>
+                    <span className="ios-app-gloss" aria-hidden="true" />
+                    <span className="dock-glyph">{l.letter}</span>
+                  </>
+                )}
               </span>
               <span className="ios-app-label">{l.label}</span>
             </a>

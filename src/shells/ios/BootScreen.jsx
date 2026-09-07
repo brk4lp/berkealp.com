@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
+import appleBootLogo from '../../../icons/apple-boot-logo.png'
 
 /**
- * iOS kısa açılış: siyah zemin, jenerik logo + spinner. ~1.5sn sonra
+ * iOS kısa açılış: siyah zemin, Apple logo + spinner. ~1.5sn sonra
  * otomatik ilerler; dokun ile atlanır.
  */
 export default function BootScreen({ onDone }) {
@@ -13,9 +14,7 @@ export default function BootScreen({ onDone }) {
 
   return (
     <div className="shell shell-ios ios-boot" onClick={onDone}>
-      <div className="ios-boot-logo" aria-hidden="true">
-        <span className="ios-boot-bite" />
-      </div>
+      <img className="ios-boot-logo" src={appleBootLogo} alt="" />
       <span className="ios-boot-spinner" aria-hidden="true" />
     </div>
   )

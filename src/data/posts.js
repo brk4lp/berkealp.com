@@ -7,7 +7,7 @@ export const posts = [
     excerpt: 'Two different operating-system interfaces in a single codebase.',
     body: `# How I Built This Site
 
-This site uses two **shells**: *Windows XP* on wide screens, *iOS 5* on narrow ones.
+This site uses two **shells**: *Windows XP* on wide screens, and a modernized *classic iOS* experience on narrow ones.
 
 The content is written once, and both shells render the same content in their own chrome.
 

@@ -32,7 +32,6 @@ export default function Blog() {
 
   return (
     <div className="app-content blog">
-      <h1 className="section-title">Blog</h1>
       <ul className="post-list">
         {posts.map((post) => (
           <li key={post.id}>

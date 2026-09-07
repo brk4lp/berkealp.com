@@ -1,4 +1,4 @@
-import { apps } from '../../data/apps.js'
+import { desktopApps as apps } from '../../data/apps.js'
 import { profile } from '../../data/profile.js'
 
 /**

@@ -11,9 +11,18 @@ import { FolderIcon, FolderOverlay } from './Folder.jsx'
 
 // Sayfalar: 0 = Spotlight, 1 = Ana ekran (app'ler + Links klasörü)
 const PAGE_COUNT = 2
+const BOOT_KEY = 'ios-boot-seen'
+
+function getInitialStage() {
+  try {
+    return sessionStorage.getItem(BOOT_KEY) === '1' ? 'lock' : 'boot'
+  } catch {
+    return 'boot'
+  }
+}
 
 export default function IOSShell() {
-  const [stage, setStage] = useState('boot')
+  const [stage, setStage] = useState(getInitialStage)
   const [page, setPage] = useState(1)
   const [dragDx, setDragDx] = useState(0)
   const [activeId, setActiveId] = useState(null)
@@ -25,6 +34,11 @@ export default function IOSShell() {
   const openApp = (id, e) => {
     const app = getApp(id)
     if (!app) return
+    if (app.externalUrl) {
+      sound.click()
+      window.open(app.externalUrl, '_blank', 'noopener,noreferrer')
+      return
+    }
     if (e?.currentTarget) {
       const r = e.currentTarget.getBoundingClientRect()
       setOrigin({ x: r.left + r.width / 2, y: r.top + r.height / 2 })
@@ -39,6 +53,15 @@ export default function IOSShell() {
     if (active) sound.close()
     setActiveId(null)
     setFolderOpen(false)
+  }
+
+  const finishBoot = () => {
+    try {
+      sessionStorage.setItem(BOOT_KEY, '1')
+    } catch {
+      /* depolama kapalıysa normal akışa devam et */
+    }
+    setStage('lock')
   }
 
   // --- Pager swipe ---
@@ -87,8 +110,13 @@ export default function IOSShell() {
     setDragDx(0)
   }
 
+  const onPointerCancel = () => {
+    drag.current = null
+    setDragDx(0)
+  }
+
   if (stage === 'boot') {
-    return <BootScreen onDone={() => setStage('lock')} />
+    return <BootScreen onDone={finishBoot} />
   }
   if (stage === 'lock') {
     return <LockScreen onUnlock={() => setStage('home')} />
@@ -109,15 +137,24 @@ export default function IOSShell() {
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
+          onPointerCancel={onPointerCancel}
         >
           <div className="ios-pager-track" style={trackStyle}>
             {/* Sayfa 0: Spotlight */}
-            <div className="ios-page">
+            <div
+              className="ios-page"
+              aria-hidden={page !== 0}
+              inert={page !== 0 ? '' : undefined}
+            >
               <Spotlight onOpenApp={(id) => openApp(id)} />
             </div>
 
             {/* Sayfa 1: Ana ekran */}
-            <div className="ios-page">
+            <div
+              className="ios-page"
+              aria-hidden={page !== 1}
+              inert={page !== 1 ? '' : undefined}
+            >
               <div className="ios-grid">
                 {apps.map((app) => (
                   <AppIcon
@@ -135,35 +172,49 @@ export default function IOSShell() {
         {/* Sayfa noktaları */}
         <div className="ios-page-dots">
           {Array.from({ length: PAGE_COUNT }).map((_, i) => (
-            <span
+            <button
               key={i}
               className={`dot${i === page ? ' active' : ''}${
                 i === 0 ? ' search' : ''
               }`}
+              onClick={() => setPage(i)}
+              aria-label={i === 0 ? 'Open Spotlight' : 'Open Home screen'}
+              aria-current={i === page ? 'page' : undefined}
             >
               {i === 0 ? '🔍' : ''}
-            </span>
+            </button>
           ))}
         </div>
 
         {/* Dock: hızlı bağlantılar */}
         <div className="ios-dock">
-          {apps.map((app) => (
+          {apps.slice(0, 4).map((app) => (
             <button
               key={app.id}
               className="ios-app dock-app"
               onClick={(e) => openApp(app.id, e)}
+              aria-label={app.title}
             >
               <span
-                className="ios-app-tile"
-                style={{
-                  background: `linear-gradient(to bottom, ${app.tint[0]}, ${app.tint[1]})`,
-                }}
+                className={`ios-app-tile${app.iosIcon ? ' has-artwork' : ''}`}
+                style={
+                  app.iosIcon
+                    ? undefined
+                    : {
+                        background: `linear-gradient(to bottom, ${app.tint[0]}, ${app.tint[1]})`,
+                      }
+                }
               >
-                <span className="ios-app-gloss" aria-hidden="true" />
-                <span className="ios-app-glyph">
-                  <app.Glyph />
-                </span>
+                {app.iosIcon ? (
+                  <img className="ios-app-artwork" src={app.iosIcon} alt="" />
+                ) : (
+                  <>
+                    <span className="ios-app-gloss" aria-hidden="true" />
+                    <span className="ios-app-glyph">
+                      <app.Glyph />
+                    </span>
+                  </>
+                )}
               </span>
             </button>
           ))}
@@ -176,20 +227,14 @@ export default function IOSShell() {
       {/* Açık uygulama */}
       {active && (
         <div className="ios-app-layer">
-          <AppView app={active} origin={origin} />
+          <AppView app={active} origin={origin} onClose={goHome} />
         </div>
       )}
 
-      {/* Fiziksel home tuşu */}
-      <div className="ios-homebar">
-        <button
-          className="ios-home-button"
-          aria-label="Home"
-          onClick={goHome}
-        >
-          <span className="home-square" />
-        </button>
-      </div>
+      {/* Modern cihazlardaki home indicator; geniş dokunma alanı ana ekrana döner. */}
+      <button className="ios-home-indicator-button" aria-label="Home" onClick={goHome}>
+        <span className="ios-home-indicator" />
+      </button>
     </div>
   )
 }

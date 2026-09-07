@@ -1,18 +1,86 @@
+import { useState } from 'react'
 import { projects } from '../data/projects.js'
+import Markdown from './Markdown.jsx'
+import GorleakDiagram from './GorleakDiagrams.jsx'
+
+function splitGorleakCaseStudy(details) {
+  const buildMarker = '## What I built'
+  const learnMarker = '## What I learned'
+  const buildIndex = details.indexOf(buildMarker)
+  const learnIndex = details.indexOf(learnMarker)
+
+  if (buildIndex === -1 || learnIndex === -1) return null
+
+  return {
+    introduction: details
+      .slice(0, buildIndex)
+      .trim()
+      .replace(/^# Gorleak\s*/, ''),
+    build: details.slice(buildIndex, learnIndex).trim(),
+    lessons: details.slice(learnIndex).trim(),
+  }
+}
 
 export default function Projects() {
+  const [activeId, setActiveId] = useState(null)
+  const active = projects.find((project) => project.id === activeId)
+  const gorleakSections = active?.id === 'gorleak'
+    ? splitGorleakCaseStudy(active.details)
+    : null
+
+  if (active?.details) {
+    return (
+      <div className="app-content project-detail">
+        <button className="link-btn" onClick={() => setActiveId(null)}>
+          ← All projects
+        </button>
+        <div
+          className="project-detail-hero"
+          style={{
+            background: `linear-gradient(135deg, ${active.color[0]}, ${active.color[1]})`,
+          }}
+        >
+          <span>{active.title.charAt(0)}</span>
+          <strong>{active.title}</strong>
+        </div>
+        {gorleakSections ? (
+          <>
+            <div className="project-detail-panel">
+              <Markdown>{gorleakSections.introduction}</Markdown>
+            </div>
+            <GorleakDiagram variant="discovery" />
+            <div className="project-detail-panel">
+              <Markdown>{gorleakSections.build}</Markdown>
+            </div>
+            <GorleakDiagram variant="monitoring" />
+            <div className="project-detail-panel">
+              <Markdown>{gorleakSections.lessons}</Markdown>
+            </div>
+          </>
+        ) : (
+          <div className="project-detail-panel">
+            <Markdown>{active.details}</Markdown>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="app-content projects">
-      <h1 className="section-title">Projects</h1>
       <div className="project-grid">
-        {projects.map((p) => (
-          <a
-            key={p.id}
-            className="project-card"
-            href={p.url}
-            target={p.url.startsWith('http') ? '_blank' : undefined}
-            rel="noreferrer noopener"
-          >
+        {projects.map((p) => {
+          const Card = p.details ? 'button' : 'a'
+          const cardProps = p.details
+            ? { type: 'button', onClick: () => setActiveId(p.id) }
+            : {
+                href: p.url,
+                target: p.url?.startsWith('http') ? '_blank' : undefined,
+                rel: 'noreferrer noopener',
+              }
+
+          return (
+          <Card key={p.id} className="project-card" {...cardProps}>
             <div
               className="project-thumb"
               style={{
@@ -32,9 +100,11 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
+              {p.status && <span className="project-status">{p.status} →</span>}
             </div>
-          </a>
-        ))}
+          </Card>
+          )
+        })}
       </div>
     </div>
   )

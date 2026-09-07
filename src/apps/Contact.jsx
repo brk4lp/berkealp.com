@@ -3,11 +3,10 @@ import { profile } from '../data/profile.js'
 export default function Contact() {
   return (
     <div className="app-content contact">
-      <h1 className="section-title">Contact</h1>
-
       <a className="contact-row" href={`mailto:${profile.email}`}>
-        <span className="contact-label">✉️ Email</span>
+        <span className="contact-label">Email</span>
         <span className="contact-value">{profile.email}</span>
+        <span className="contact-arrow" aria-hidden="true">↗</span>
       </a>
 
       {profile.social.map((s) => (
@@ -18,13 +17,14 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer noopener"
         >
-          <span className="contact-label">🔗 {s.label}</span>
+          <span className="contact-label">{s.label}</span>
           <span className="contact-value">{s.handle}</span>
+          <span className="contact-arrow" aria-hidden="true">↗</span>
         </a>
       ))}
 
       <a className="cv-button" href={profile.cvUrl} download>
-        ⬇ Download CV / Résumé
+        Download CV / Résumé <span aria-hidden="true">↓</span>
       </a>
 
       <p className="contact-note">

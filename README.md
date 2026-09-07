@@ -3,7 +3,7 @@
 Kişisel portfolyo & web sitesi. Tek kod tabanı, iki "kabuk":
 
 - **Masaüstü (≥768px):** Windows XP masaüstü — sürüklenebilir pencereler, taskbar, Start menüsü, saat.
-- **Mobil (<768px):** iOS 5 ana ekranı — glossy ikon ızgarası, dock, tam ekran uygulama görünümü.
+- **Mobil (<768px):** iOS 6 esintili modern ana ekran — glossy ikonlar, cam dock, safe-area ve tam ekran uygulama görünümü.
 
 İçerik (Hakkımda, Projeler, Blog, İletişim) bir kez yazılır; her iki kabuk aynı içeriği kendi
 arayüzünde gösterir.
@@ -28,7 +28,7 @@ src/
   data/                # profile, projects, posts, apps (tek kayıt), icons
   apps/                # About, Projects, Blog, Contact (kabuktan bağımsız içerik)
   shells/xp/           # Windows XP kabuğu
-  shells/ios/          # iOS 5 kabuğu
+  shells/ios/          # Klasik iOS esintili modern mobil kabuk
   styles/              # reset, fonts, content
 ```
 
@@ -42,3 +42,8 @@ src/
 
 Windows XP ve iOS görselleri telif nedeniyle kopyalanmadı; tüm arayüz CSS + SVG ile yeniden
 üretildi (telifsiz ve hafif).
+
+## İkon atıfları
+
+iOS uygulama ikonlarında kullanılan ve kendi dosya başlıklarında atıf şartı belirten SVG
+varlıkları [SVGStack](https://svgstack.com/) kaynaklıdır.

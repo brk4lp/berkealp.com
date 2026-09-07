@@ -29,6 +29,18 @@ export default function Spotlight({ onOpenApp }) {
 
   return (
     <div className="ios-spotlight">
+      <div className="ios-spotlight-heading">
+        <h1>Spotlight</h1>
+        <button
+          className="ios-sound-toggle"
+          onClick={toggleMuted}
+          aria-label={muted ? 'Turn sounds on' : 'Turn sounds off'}
+          title={muted ? 'Sounds off' : 'Sounds on'}
+        >
+          <span aria-hidden="true">{muted ? '🔇' : '🔊'}</span>
+        </button>
+      </div>
+
       <div className="ios-spotlight-bar">
         <span className="ios-spotlight-icon" aria-hidden="true">🔍</span>
         <input
@@ -57,10 +69,6 @@ export default function Spotlight({ onOpenApp }) {
           <li className="ios-spotlight-empty">No results</li>
         )}
       </ul>
-
-      <button className="ios-sound-toggle" onClick={toggleMuted}>
-        {muted ? '🔇 Sounds off' : '🔊 Sounds on'}
-      </button>
     </div>
   )
 }

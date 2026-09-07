@@ -1,36 +1,58 @@
-// Placeholder project data — replace with real projects.
-// color: gradient of the placeholder thumbnail on top of the card.
+// Public projects from https://github.com/brk4lp.
 export const projects = [
   {
-    id: 'proj-1',
-    title: 'Retro Portfolio',
-    description: 'A personal site blending Windows XP and iOS 5 aesthetics.',
-    tags: ['React', 'Vite', 'CSS'],
-    url: '#',
-    color: ['#245edc', '#3a93ff'],
+    id: 'tiny11-gui',
+    title: 'Tiny11 GUI',
+    description:
+      'I built a Windows desktop app that makes it easier to create a lighter, customized Windows 11 ISO.',
+    tags: ['C#', '.NET 8', 'WPF', 'PowerShell', 'DISM'],
+    url: 'https://github.com/brk4lp/Tiny11-GUI',
+    color: ['#512bd4', '#137bd1'],
   },
   {
-    id: 'proj-2',
-    title: 'Task Manager',
-    description: 'A minimal to-do app with drag-and-drop support.',
-    tags: ['TypeScript', 'IndexedDB'],
-    url: '#',
-    color: ['#3c9a1e', '#8fd44a'],
+    id: 'detay-folder-script',
+    title: 'Photo Studio Folder Script',
+    description:
+      "I wrote this small Python script to create each day's photographer and side-photo folders automatically.",
+    tags: ['Python', 'File Automation', 'Photo Studio'],
+    url: 'https://github.com/brk4lp/detayFolderScript',
+    color: ['#3776ab', '#ffd343'],
   },
   {
-    id: 'proj-3',
-    title: 'Weather Widget',
-    description: 'A location-based, animated weather component.',
-    tags: ['API', 'SVG'],
-    url: '#',
-    color: ['#e67e22', '#f6b93b'],
-  },
-  {
-    id: 'proj-4',
-    title: 'Music Visualizer',
-    description: 'Real-time audio visualization with the Web Audio API.',
-    tags: ['Canvas', 'Web Audio'],
-    url: '#',
-    color: ['#8e44ad', '#c56cf0'],
+    id: 'gorleak',
+    title: 'Gorleak',
+    description:
+      'I built a daily monitoring tool after finding an exposed media directory connected to a suspicious online marketplace.',
+    tags: ['SQLite', 'Automation', 'Web Monitoring', 'OSINT'],
+    status: 'Private case study',
+    color: ['#20242c', '#c44536'],
+    details: `# Gorleak
+
+I came across a Telegram bot selling suspicious digital products. The bot redirected each user to a separate storefront linked to their Telegram ID, while visiting the main website directly returned a 403 response.
+
+During my research, I found that one of the site's media directories was publicly accessible. It contained randomly named images related to the listed products. Most of the information was already activated or unusable, but the exposed directory itself was still a serious security problem.
+
+## What I built
+
+I built Gorleak to monitor that directory automatically. The tool runs once a day, checks the available filenames and compares them with the records already stored in SQLite.
+
+When it discovers a filename that is not in the database, it:
+
+- creates a folder named after the scan date
+- saves the newly discovered image in that folder
+- records the filename and discovery date in SQLite
+- skips files that were already seen in earlier scans
+
+This gave me a simple timeline of when new files appeared without processing the same items again.
+
+## What I learned
+
+- building repeatable and idempotent scheduled jobs
+- using SQLite for lightweight historical tracking
+- comparing new scan results with existing records
+- organizing collected files by discovery date
+- handling exposed data carefully and documenting security findings responsibly
+
+I kept this as a private case study and did not publish or redistribute the exposed data.`,
   },
 ]
