@@ -1,6 +1,36 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/go/github",
+      "destination": "https://github.com/brk4lp",
+      "permanent": false
+    },
+    {
+      "source": "/go/tiny11",
+      "destination": "https://github.com/brk4lp/Tiny11-GUI",
+      "permanent": false
+    },
+    {
+      "source": "/go/adapos",
+      "destination": "https://drive.google.com/drive/folders/1qyLYlMFZs1EiKW1w8y9pikfIe0_rtIJ8?usp=sharing",
+      "permanent": false
+    },
+    {
+      "source": "/go/photoscript",
+      "destination": "https://github.com/brk4lp/detayFolderScript",
+      "permanent": false
+    },
+    {
+      "source": "/go/spotify",
+      "destination": "https://open.spotify.com/user/qwvsfd1gbu135l7d9iynji6w9",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/go/:destination", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

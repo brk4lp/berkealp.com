@@ -8,8 +8,7 @@ export const outboundLinks = [
 ]
 
 export function outboundHref(url) {
-  const link = outboundLinks.find((item) => item.url === url)
-  return link ? `/go/${link.id}` : url
+  return url
 }
 
 export function getOutboundLink(path) {

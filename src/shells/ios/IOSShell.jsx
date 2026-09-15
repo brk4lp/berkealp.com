@@ -1,4 +1,6 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { navigate, routeApp, usePath } from '../../lib/navigation.js'
+import CVView from '../xp/CVView.jsx'
 import { outboundHref } from '../../data/outbound.js'
 import { mobileApps as apps, getApp } from '../../data/apps.js'
 import { sound } from '../../lib/sound.js'
@@ -23,14 +25,19 @@ function getInitialStage() {
 }
 
 export default function IOSShell() {
-  const [stage, setStage] = useState(getInitialStage)
+  const path = usePath()
+  const [stage, setStage] = useState(() => path === '/' ? getInitialStage() : 'home')
   const [page, setPage] = useState(1)
   const [dragDx, setDragDx] = useState(0)
-  const [activeId, setActiveId] = useState(null)
+  const activeId = routeApp(path)
   const [origin, setOrigin] = useState(null)
   const [folderOpen, setFolderOpen] = useState(false)
   const drag = useRef(null)
   const active = activeId ? getApp(activeId) : null
+  useEffect(() => {
+    if (path !== '/') setStage('home')
+    setFolderOpen(false)
+  }, [path])
 
   const openApp = (id, e) => {
     const app = getApp(id)
@@ -47,12 +54,12 @@ export default function IOSShell() {
       setOrigin(null)
     }
     sound.open()
-    setActiveId(id)
+    navigate(`/${id}`)
   }
 
   const goHome = () => {
     if (active) sound.close()
-    setActiveId(null)
+    navigate('/')
     setFolderOpen(false)
   }
 
@@ -116,6 +123,7 @@ export default function IOSShell() {
     setDragDx(0)
   }
 
+  if (path === '/cv') return <CVView onSwitchUser={goHome} />
   if (stage === 'boot') {
     return <BootScreen onDone={finishBoot} />
   }

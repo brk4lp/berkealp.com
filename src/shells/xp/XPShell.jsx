@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { navigate, routeApp, usePath } from '../../lib/navigation.js'
 import { desktopApps as apps, getApp } from '../../data/apps.js'
 import { useWindowManager } from '../../hooks/useWindowManager.js'
 import { sound } from '../../lib/sound.js'
@@ -16,12 +17,31 @@ import PropertiesDialog from './PropertiesDialog.jsx'
 
 export default function XPShell() {
   // Açılış akışı: boot -> logon -> (desktop | cv)
-  const [stage, setStage] = useState('boot')
+  const path = usePath()
+  const [stage, setStage] = useState(path === '/' ? 'boot' : path === '/cv' ? 'cv' : 'desktop')
   const wm = useWindowManager()
   const [startOpen, setStartOpen] = useState(false)
   const [menu, setMenu] = useState(null) // { x, y }
   const [showProps, setShowProps] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
+  const { open, minimizeAll } = wm
+  useEffect(() => {
+    const id = routeApp(path)
+    if (path === '/cv') setStage('cv')
+    else if (id) { setStage('desktop'); open(id) }
+    else { minimizeAll(); setStage((current) => current === 'cv' ? 'desktop' : current) }
+    setStartOpen(false)
+  }, [path, open, minimizeAll])
+
+  const reveal = (appId) => {
+    const next = `/${appId}`
+    if (routeApp(path) !== appId) navigate(next)
+  }
+  const routeAfterHide = (id) => {
+    if (id !== activeId) return
+    const next = wm.windows.filter((w) => w.id !== id && !w.minimized).sort((a, b) => b.z - a.z)[0]
+    navigate(next ? `/${next.appId}` : '/')
+  }
 
   // En üstteki (odaklı) pencere = en yüksek z, minimize değil.
   const activeId = useMemo(() => {
@@ -43,16 +63,19 @@ export default function XPShell() {
     else if (!existing) sound.open()
     else sound.click()
     wm.open(id)
+    reveal(id)
   }
 
   const closeWin = (id) => {
     sound.close()
     wm.close(id)
+    routeAfterHide(id)
   }
 
   const minimizeWin = (id) => {
     sound.minimize()
     wm.minimize(id)
+    routeAfterHide(id)
   }
 
   const handleTaskbarSelect = (id) => {
@@ -63,6 +86,7 @@ export default function XPShell() {
       if (win?.minimized) sound.restore()
       else sound.click()
       wm.focus(id)
+      if (win) reveal(win.appId)
     }
   }
 
@@ -70,6 +94,7 @@ export default function XPShell() {
     setStartOpen(false)
     wm.reset()
     setStage('logon')
+    navigate('/')
   }
 
   const openContextMenu = (e) => {
@@ -96,7 +121,7 @@ export default function XPShell() {
   }
 
   if (stage === 'logon') {
-    return <LogonScreen onSelect={(id) => setStage(id)} />
+    return <LogonScreen onSelect={(id) => { setStage(id); if (id === 'cv') navigate('/cv') }} />
   }
 
   if (stage === 'cv') {
@@ -127,7 +152,7 @@ export default function XPShell() {
             onClose={() => closeWin(w.id)}
             onMinimize={() => minimizeWin(w.id)}
             onToggleMaximize={() => wm.toggleMaximize(w.id)}
-            onFocus={() => wm.focus(w.id)}
+            onFocus={() => { wm.focus(w.id); reveal(w.appId) }}
             onMove={(x, y) => wm.move(w.id, x, y)}
           >
             <Body />

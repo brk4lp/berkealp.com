@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { navigate, usePath } from '../lib/navigation.js'
 import { projects } from '../data/projects.js'
 import { outboundHref } from '../data/outbound.js'
 import Markdown from './Markdown.jsx'
@@ -23,7 +24,11 @@ function splitGorleakCaseStudy(details) {
 }
 
 export default function Projects() {
-  const [activeId, setActiveId] = useState(null)
+  const path = usePath()
+  const [activeId, setActiveId] = useState(path === '/projects/gorleak' ? 'gorleak' : null)
+  useEffect(() => {
+    if (path === '/projects' || path === '/projects/gorleak') setActiveId(path === '/projects/gorleak' ? 'gorleak' : null)
+  }, [path])
   const active = projects.find((project) => project.id === activeId)
   const gorleakSections = active?.id === 'gorleak'
     ? splitGorleakCaseStudy(active.details)
@@ -32,7 +37,7 @@ export default function Projects() {
   if (active?.details) {
     return (
       <div className="app-content project-detail">
-        <button className="link-btn" onClick={() => setActiveId(null)}>
+        <button className="link-btn" onClick={() => navigate('/projects')}>
           ← All projects
         </button>
         <div
@@ -73,7 +78,7 @@ export default function Projects() {
         {projects.map((p) => {
           const Card = p.details ? 'button' : 'a'
           const cardProps = p.details
-            ? { type: 'button', onClick: () => setActiveId(p.id) }
+            ? { type: 'button', onClick: () => navigate(`/projects/${p.id}`) }
             : {
                 href: outboundHref(p.url),
                 target: p.url?.startsWith('http') ? '_blank' : undefined,

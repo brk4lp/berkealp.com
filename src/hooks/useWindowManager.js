@@ -77,6 +77,7 @@ export function useWindowManager() {
   }, [])
 
   const reset = useCallback(() => setWindows([]), [])
+  const minimizeAll = useCallback(() => setWindows((ws) => ws.map((w) => ({ ...w, minimized: true }))), [])
 
-  return { windows, open, close, focus, minimize, toggleMaximize, move, reset }
+  return { windows, open, close, focus, minimize, minimizeAll, toggleMaximize, move, reset }
 }
