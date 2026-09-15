@@ -1,6 +1,7 @@
 import { getApp } from '../../data/apps.js'
 import { useMuted } from '../../hooks/useMuted.js'
 import Clock from './Clock.jsx'
+import AppGlyph from './AppGlyph.jsx'
 
 /**
  * Alt görev çubuğu: Start butonu, açık pencere sekmeleri, saat.
@@ -39,7 +40,7 @@ export default function Taskbar({
               onClick={() => onSelectWindow(w.id)}
             >
               <span className="taskbar-tab-icon">
-                {app ? <app.Glyph /> : null}
+                {app ? <AppGlyph app={app} /> : null}
               </span>
               <span className="taskbar-tab-label">{app?.title}</span>
             </button>

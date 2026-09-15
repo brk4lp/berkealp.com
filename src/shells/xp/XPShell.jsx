@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { desktopApps as apps, getApp } from '../../data/apps.js'
 import { useWindowManager } from '../../hooks/useWindowManager.js'
 import { sound } from '../../lib/sound.js'
+import { outboundHref } from '../../data/outbound.js'
 import Window from './Window.jsx'
 import DesktopIcon from './DesktopIcon.jsx'
 import Taskbar from './Taskbar.jsx'
@@ -30,6 +31,13 @@ export default function XPShell() {
   }, [wm.windows])
 
   const openApp = (id) => {
+    const app = getApp(id)
+    if (!app) return
+    if (app.externalUrl) {
+      sound.click()
+      window.open(outboundHref(app.externalUrl), '_blank', 'noopener,noreferrer')
+      return
+    }
     const existing = wm.windows.find((w) => w.appId === id)
     if (existing && existing.minimized) sound.restore()
     else if (!existing) sound.open()
@@ -115,6 +123,7 @@ export default function XPShell() {
             key={w.id}
             win={w}
             title={app.title}
+            app={app}
             onClose={() => closeWin(w.id)}
             onMinimize={() => minimizeWin(w.id)}
             onToggleMaximize={() => wm.toggleMaximize(w.id)}

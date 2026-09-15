@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import AppGlyph from './AppGlyph.jsx'
 
 /**
  * XP Luna pencere: sürüklenebilir başlık çubuğu + min/max/kapat.
@@ -7,6 +8,7 @@ import { useRef } from 'react'
 export default function Window({
   win,
   title,
+  app,
   children,
   onClose,
   onMinimize,
@@ -75,6 +77,7 @@ export default function Window({
         onPointerUp={onPointerUp}
         onDoubleClick={onTitleDoubleClick}
       >
+        {app && <span className="xp-title-icon"><AppGlyph app={app} /></span>}
         <span className="xp-title-text">{title}</span>
         <div className="xp-title-buttons">
           <button

@@ -1,6 +1,7 @@
 import { desktopApps as apps } from '../../data/apps.js'
 import { profile } from '../../data/profile.js'
 import SocialLink from '../../apps/SocialLink.jsx'
+import AppGlyph from './AppGlyph.jsx'
 
 /**
  * XP Start menüsü: üstte kullanıcı bandı, solda bölümler, altta linkler.
@@ -23,7 +24,6 @@ export default function StartMenu({ onOpen, onClose, onLogOff }) {
         <div className="startmenu-body">
           <div className="startmenu-col startmenu-left">
             {apps.map((app) => {
-              const { Glyph } = app
               return (
                 <button
                   key={app.id}
@@ -35,7 +35,7 @@ export default function StartMenu({ onOpen, onClose, onLogOff }) {
                   }}
                 >
                   <span className="startmenu-item-icon">
-                    <Glyph />
+                    <AppGlyph app={app} />
                   </span>
                   <span>{app.title}</span>
                 </button>

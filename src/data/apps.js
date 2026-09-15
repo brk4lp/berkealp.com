@@ -22,6 +22,7 @@ import {
 export const apps = [
   {
     id: 'about',
+    xpIcon: '/icons/xp/about.png',
     title: 'About',
     Glyph: AboutGlyph,
     Component: About,
@@ -30,6 +31,7 @@ export const apps = [
   },
   {
     id: 'projects',
+    xpIcon: '/icons/xp/projects.png',
     title: 'Projects',
     Glyph: ProjectsGlyph,
     Component: Projects,
@@ -39,6 +41,7 @@ export const apps = [
   },
   {
     id: 'blog',
+    xpIcon: '/icons/xp/blog.png',
     title: 'Blog',
     Glyph: BlogGlyph,
     Component: Blog,
@@ -48,6 +51,7 @@ export const apps = [
   },
   {
     id: 'contact',
+    xpIcon: '/icons/xp/contact.png',
     title: 'Contact',
     Glyph: ContactGlyph,
     Component: Contact,
@@ -57,16 +61,17 @@ export const apps = [
   },
   {
     id: 'spotify',
+    xpIcon: spotifyIOSIcon,
     title: 'Spotify',
     Glyph: null,
     Component: null,
     tint: ['#1ed760', '#121212'],
     iosIcon: spotifyIOSIcon,
     externalUrl: 'https://open.spotify.com/user/qwvsfd1gbu135l7d9iynji6w9',
-    mobileOnly: true,
   },
   {
     id: 'my-computer',
+    xpIcon: '/icons/xp/my-computer.png',
     title: 'My Computer',
     Glyph: MyComputerGlyph,
     Component: MyComputer,
@@ -76,6 +81,7 @@ export const apps = [
   },
   {
     id: 'recycle-bin',
+    xpIcon: '/icons/xp/recycle-bin.png',
     title: 'Recycle Bin',
     Glyph: RecycleBinGlyph,
     Component: RecycleBin,
