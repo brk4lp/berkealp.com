@@ -178,7 +178,7 @@
 .xp-dialog-screen {
   height: 100%;
   border-radius: 2px;
-  background: linear-gradient(to bottom, #4d90e0, #7cbf5a 60%, #4c9c37);
+  background: #4d90e0 url('/wallpapers/windows-xp-bliss.jpeg') center / cover no-repeat;
 }
 .xp-dialog-props {
   flex: 1;
@@ -418,17 +418,7 @@
   position: fixed;
   inset: 0;
   overflow: hidden;
-  /* Bliss benzeri tepe-gökyüzü gradyanı (telifsiz, CSS ile). */
-  background: linear-gradient(
-    to bottom,
-    #4d90e0 0%,
-    #6ab0f3 28%,
-    #8fd0f7 42%,
-    #cde6c0 55%,
-    #7cbf5a 68%,
-    #5aa83f 82%,
-    #4c9c37 100%
-  );
+  background: #4d90e0 url('/wallpapers/windows-xp-bliss.jpeg') center / cover no-repeat;
   user-select: none;
 }
 

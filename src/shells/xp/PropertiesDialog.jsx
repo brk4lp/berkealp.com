@@ -29,7 +29,7 @@ export default function PropertiesDialog({ onClose }) {
             <dt>Theme</dt>
             <dd>berkeOS Luna (Blue)</dd>
             <dt>Wallpaper</dt>
-            <dd>Bliss (stretched)</dd>
+            <dd>Bliss (Fill)</dd>
             <dt>Resolution</dt>
             <dd>{window.innerWidth} × {window.innerHeight}</dd>
             <dt>Color quality</dt>
