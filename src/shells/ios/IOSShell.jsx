@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { outboundHref } from '../../data/outbound.js'
 import { mobileApps as apps, getApp } from '../../data/apps.js'
 import { sound } from '../../lib/sound.js'
 import AppIcon from './AppIcon.jsx'
@@ -36,7 +37,7 @@ export default function IOSShell() {
     if (!app) return
     if (app.externalUrl) {
       sound.click()
-      window.open(app.externalUrl, '_blank', 'noopener,noreferrer')
+      window.open(outboundHref(app.externalUrl), '_blank', 'noopener,noreferrer')
       return
     }
     if (e?.currentTarget) {

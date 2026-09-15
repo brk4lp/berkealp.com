@@ -1,4 +1,18 @@
 /* ===== Kabuktan bağımsız içerik stilleri ===== */
+.outbound-page {
+  min-height: 100%;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: #f7f8fa;
+  color: #17243a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.outbound-panel { width: 100%; max-width: 440px; text-align: center; }
+.outbound-panel h1 { margin: 16px 0; font-size: 26px; }
+.outbound-panel p { margin-bottom: 24px; color: #69707d; line-height: 1.5; }
+.outbound-panel .link-btn { display: inline-block; text-decoration: none; }
+.outbound-home { display: block; margin-top: 24px; color: #69707d; }
 
 /* ----- My Computer ----- */
 .mc-group {

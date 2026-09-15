@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { projects } from '../data/projects.js'
+import { outboundHref } from '../data/outbound.js'
 import Markdown from './Markdown.jsx'
 import GorleakDiagram from './GorleakDiagrams.jsx'
 
@@ -74,7 +75,7 @@ export default function Projects() {
           const cardProps = p.details
             ? { type: 'button', onClick: () => setActiveId(p.id) }
             : {
-                href: p.url,
+                href: outboundHref(p.url),
                 target: p.url?.startsWith('http') ? '_blank' : undefined,
                 rel: 'noreferrer noopener',
               }

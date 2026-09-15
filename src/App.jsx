@@ -1,6 +1,7 @@
 import { useMediaQuery } from './hooks/useMediaQuery.js'
 import XPShell from './shells/xp/XPShell.jsx'
 import IOSShell from './shells/ios/IOSShell.jsx'
+import Outbound from './apps/Outbound.jsx'
 
 /**
  * Viewport genişliğine göre kabuk seçer:
@@ -9,5 +10,6 @@ import IOSShell from './shells/ios/IOSShell.jsx'
  */
 export default function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
+  if (window.location.pathname.startsWith('/go/')) return <Outbound />
   return isDesktop ? <XPShell /> : <IOSShell />
 }

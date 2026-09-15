@@ -1,10 +1,11 @@
 import { useId, useRef } from 'react'
+import { outboundHref } from '../data/outbound.js'
 
 export default function SocialLink({ maintenance, label, children, onClick, ...props }) {
   const dialog = useRef(null)
   const titleId = useId()
 
-  if (!maintenance) return <a {...props} onClick={onClick}>{children}</a>
+  if (!maintenance) return <a {...props} href={outboundHref(props.href)} onClick={onClick}>{children}</a>
 
   const { href, target, rel, ...buttonProps } = props
   return (
