@@ -1,5 +1,6 @@
 import { desktopApps as apps } from '../../data/apps.js'
 import { profile } from '../../data/profile.js'
+import SocialLink from '../../apps/SocialLink.jsx'
 
 /**
  * XP Start menüsü: üstte kullanıcı bandı, solda bölümler, altta linkler.
@@ -45,8 +46,10 @@ export default function StartMenu({ onOpen, onClose, onLogOff }) {
           <div className="startmenu-col startmenu-right">
             <p className="startmenu-right-title">Links</p>
             {profile.social.map((s) => (
-              <a
+              <SocialLink
                 key={s.label}
+                label={s.label}
+                maintenance={s.maintenance}
                 className="startmenu-item"
                 href={s.url}
                 target="_blank"
@@ -54,7 +57,7 @@ export default function StartMenu({ onOpen, onClose, onLogOff }) {
                 onClick={onClose}
               >
                 <span>{s.label}</span>
-              </a>
+              </SocialLink>
             ))}
             <a
               className="startmenu-item"

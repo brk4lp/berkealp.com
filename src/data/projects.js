@@ -30,7 +30,7 @@ export const projects = [
 
 I came across a Telegram bot selling suspicious digital products. The bot redirected each user to a separate storefront linked to their Telegram ID, while visiting the main website directly returned a 403 response.
 
-During my research, I found that one of the site's media directories was publicly accessible. It contained randomly named images related to the listed products. Most of the information was already activated or unusable, but the exposed directory itself was still a serious security problem.
+I used dirsearch to enumerate the site's accessible paths and found that the \`/media//\` directory returned a 200 response. Opening it revealed randomly named images related to the listed products. Most of the information was already activated or unusable, but the exposed directory itself was still a serious security problem.
 
 ## What I built
 

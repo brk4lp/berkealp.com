@@ -2,7 +2,7 @@ const discoverySteps = [
   { label: 'Bot entry', detail: 'The flow started inside a Telegram bot.' },
   { label: 'User storefront', detail: 'Each visitor was sent to a separate storefront.' },
   { label: 'Protected root', detail: 'Opening the main domain directly returned 403.' },
-  { label: 'Open media index', detail: 'A public media directory exposed randomly named files.' },
+  { label: 'dirsearch finding', detail: 'The /media// path returned 200 and exposed randomly named files.' },
 ]
 
 const monitoringSteps = [

@@ -18,6 +18,7 @@ export const links = [
   {
     id: 'linkedin',
     label: 'LinkedIn',
+    maintenance: profile.social.find((s) => s.label === 'LinkedIn')?.maintenance,
     letter: 'in',
     url: profile.social.find((s) => s.label === 'LinkedIn')?.url || '#',
     tint: ['#3a8fd0', '#0a66c2'],
@@ -25,6 +26,7 @@ export const links = [
   {
     id: 'x',
     label: 'X',
+    maintenance: profile.social.find((s) => s.label.startsWith('Twitter'))?.maintenance,
     letter: 'X',
     url: profile.social.find((s) => s.label.startsWith('Twitter'))?.url || '#',
     tint: ['#1c1c1e', '#000'],

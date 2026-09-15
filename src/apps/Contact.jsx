@@ -1,4 +1,5 @@
 import { profile } from '../data/profile.js'
+import SocialLink from './SocialLink.jsx'
 
 export default function Contact() {
   return (
@@ -10,27 +11,25 @@ export default function Contact() {
       </a>
 
       {profile.social.map((s) => (
-        <a
+        <SocialLink
           key={s.label}
+          label={s.label}
+          maintenance={s.maintenance}
           className="contact-row"
           href={s.url}
           target="_blank"
           rel="noreferrer noopener"
         >
           <span className="contact-label">{s.label}</span>
-          <span className="contact-value">{s.handle}</span>
-          <span className="contact-arrow" aria-hidden="true">↗</span>
-        </a>
+          <span className="contact-value">{s.maintenance ? 'Under maintenance' : s.handle}</span>
+          <span className="contact-arrow" aria-hidden="true">{s.maintenance ? '⚠' : '↗'}</span>
+        </SocialLink>
       ))}
 
       <a className="cv-button" href={profile.cvUrl} download>
         Download CV / Résumé <span aria-hidden="true">↓</span>
       </a>
 
-      <p className="contact-note">
-        Note: the CV link is a placeholder for now. Add your real file as{' '}
-        <code>public/cv-placeholder.pdf</code>.
-      </p>
     </div>
   )
 }

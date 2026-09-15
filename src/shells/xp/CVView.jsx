@@ -30,8 +30,7 @@ export default function CVView({ onSwitchUser }) {
           <div className="cv-fallback">
             <p>Couldn't display the PDF.</p>
             <p className="cv-fallback-sub">
-              Add your real résumé as <code>public/cv-placeholder.pdf</code> or
-              update <code>profile.cvUrl</code>.
+              You can download the résumé to view it on your device.
             </p>
             <a className="cv-btn cv-btn-primary" href={profile.cvUrl} download>
               ⬇ Download anyway

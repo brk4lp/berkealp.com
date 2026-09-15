@@ -241,8 +241,14 @@
   grid-template-columns: 1fr;
 }
 .project-card {
+  -webkit-appearance: none;
+  appearance: none;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
@@ -258,6 +264,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
 }
 .project-thumb {
+  width: 100%;
+  flex-shrink: 0;
   height: 84px;
   display: flex;
   align-items: center;
@@ -492,6 +500,27 @@
 }
 
 /* ----- İletişim ----- */
+.maintenance-dialog {
+  margin: auto;
+  width: min(360px, calc(100% - 40px));
+  padding: 26px;
+  border: 1px solid #e5e7ec;
+  border-radius: 18px;
+  background: #fff;
+  color: #17243a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+.maintenance-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+.maintenance-symbol { color: #b7791f; font-size: 32px; }
+.maintenance-dialog h2 { margin: 12px 0; font-size: 19px; line-height: 1.3; }
+.maintenance-dialog p { margin-bottom: 20px; color: #69707d; font-size: 14px; line-height: 1.5; }
+.maintenance-dialog .link-btn { width: 100%; }
+button.contact-row { width: 100%; text-align: left; }
+
 .contact-row {
   display: flex;
   justify-content: space-between;

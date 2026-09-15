@@ -14,10 +14,10 @@ Most of my projects involve ESP32, Rust or Python. I'm also comfortable working 
     'Linux',
   ],
   email: 'berkealpkaya@gmail.com',
-  cvUrl: '/cv-placeholder.pdf',
+  cvUrl: '/Berke_Alp_Kaya_CV.pdf',
   social: [
     { label: 'GitHub', url: 'https://github.com/brk4lp', handle: '@brk4lp' },
-    { label: 'LinkedIn', url: 'https://linkedin.com/', handle: 'Berke Alp' },
-    { label: 'Twitter / X', url: 'https://x.com/', handle: '@berkealp' },
+    { label: 'LinkedIn', url: 'https://linkedin.com/', handle: 'Berke Alp', maintenance: true },
+    { label: 'Twitter / X', url: 'https://x.com/', handle: '@berkealp', maintenance: true },
   ],
 }

@@ -1,4 +1,5 @@
 import { links } from '../../data/home.js'
+import SocialLink from '../../apps/SocialLink.jsx'
 
 /**
  * Ön-tanımlı "Links" klasörü. İki parça:
@@ -42,8 +43,10 @@ export function FolderOverlay({ onClose }) {
         <p className="ios-folder-title">Links</p>
         <div className="ios-folder-apps">
           {links.map((l) => (
-            <a
+            <SocialLink
               key={l.id}
+              label={l.label}
+              maintenance={l.maintenance}
               className="ios-app"
               href={l.url}
               target={l.url.startsWith('http') ? '_blank' : undefined}
@@ -69,7 +72,7 @@ export function FolderOverlay({ onClose }) {
                 )}
               </span>
               <span className="ios-app-label">{l.label}</span>
-            </a>
+            </SocialLink>
           ))}
         </div>
       </div>
