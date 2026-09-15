@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Berke Alp Kaya',
   title: 'Mechatronics Engineering Student',
-  location: 'Istanbul, Turkey',
+  location: 'Izmir, Turkey',
   bio: `I'm a fourth-year Mechatronics Engineering student interested in automation, electronics and software.
 Most of my projects involve ESP32, Rust or Python. I'm also comfortable working with Git and Linux.`,
   skills: [
