@@ -1,5 +1,15 @@
-// Public projects from https://github.com/brk4lp.
+// Portfolio projects and case studies.
 export const projects = [
+  {
+    id: 'adapos',
+    title: 'AdaPOS',
+    description:
+      'I built a restaurant management app with Flutter and Firebase for tables, menus, orders and payment tracking, with real-time data sync, staff management and sales reports.',
+    tags: ['Flutter', 'Dart', 'Firebase', 'Firestore'],
+    status: 'View project files',
+    url: 'https://drive.google.com/drive/folders/1qyLYlMFZs1EiKW1w8y9pikfIe0_rtIJ8?usp=sharing',
+    color: ['#087f8c', '#13556b'],
+  },
   {
     id: 'tiny11-gui',
     title: 'Tiny11 GUI',
