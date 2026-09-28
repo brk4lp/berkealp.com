@@ -9,6 +9,7 @@ import './styles/fonts.css'
 import './styles/content.css'
 import './shells/xp/xp.css'
 import './shells/ios/ios.css'
+import './shells/ios/ios-content.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

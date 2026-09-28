@@ -1,0 +1,108 @@
+/* Shared mobile application surfaces, based on the Photos library. */
+.shell-ios .ios-appview,
+.shell-ios .ios-appview-body,
+.shell-ios .ios-appview .ios-statusbar.dark { background: #fff; }
+.shell-ios .ios-appview-body { overscroll-behavior-y: contain; scrollbar-width: none; }
+
+.ios-app-header {
+  flex-shrink: 0;
+  padding: 7px 20px 16px;
+  background: #fff;
+  color: #171719;
+  font: 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.ios-app-header-topline {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  margin-bottom: 5px;
+}
+.ios-app-home {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 30px;
+  margin-right: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #007aff;
+  font: inherit;
+  cursor: pointer;
+}
+.ios-app-home svg { width: 18px; height: 24px; flex-shrink: 0; }
+.ios-app-home:active { opacity: .55; }
+.ios-app-home:focus-visible { outline: 2px solid #007aff; outline-offset: 3px; border-radius: 4px; }
+.ios-app-header h1 { margin: 0; font-size: 34px; font-weight: 750; line-height: 1.15; letter-spacing: -1.3px; }
+.ios-app-subtitle { margin: 5px 0 0; color: #85858b; font-size: 13px; }
+
+.shell-ios .app-content {
+  --content-ink: #171719;
+  --content-muted: #85858b;
+  --content-line: #e6e6e8;
+  --content-soft: #f2f2f7;
+  --content-accent: #007aff;
+  width: 100%;
+  max-width: 720px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 12px 20px calc(32px + env(safe-area-inset-bottom));
+  background: #fff;
+  color: var(--content-ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.shell-ios .content-subtitle { margin: 26px 0 12px; font-size: 20px; letter-spacing: -.4px; }
+.shell-ios .about-head { gap: 14px; margin: 0 0 24px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.shell-ios .about-head > div:last-child { min-width: 0; }
+.shell-ios .about-avatar { width: 64px; height: 64px; font-size: 23px; background: #f2f2f7; color: #85858b; box-shadow: none; }
+.shell-ios .about-name { color: var(--content-ink); font-size: 22px; line-height: 1.2; }
+.shell-ios .about-title { margin-top: 5px; color: #636368; font-size: 13px; }
+.shell-ios .about-location { margin-top: 4px; color: var(--content-muted); font-size: 12px; }
+.shell-ios .about-bio { margin: 0; padding: 0; color: #48484d; font-size: 15px; line-height: 1.65; }
+.shell-ios .skill-list { gap: 8px; }
+.shell-ios .skill-chip { padding: 6px 11px; border: 0; border-radius: 8px; background: var(--content-soft); color: #636368; font-size: 12px; font-weight: 500; box-shadow: none; }
+
+.shell-ios .project-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.shell-ios :is(.project-card, .post-item, .contact-row) {
+  border: 0;
+  border-bottom: 1px solid var(--content-line);
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+  transform: none;
+  transition: background .15s;
+}
+.shell-ios :is(.project-card, .post-item, .contact-row):is(:hover, :active) { background: #f9f9fb; border-color: var(--content-line); box-shadow: none; transform: none; }
+.shell-ios :is(.project-card, .post-item, .contact-row, .cv-button, .link-btn):focus-visible { outline: 2px solid #007aff; outline-offset: -2px; }
+.shell-ios .project-card { display: flex; flex-direction: row; align-items: flex-start; gap: 14px; padding: 20px 0; }
+.shell-ios .project-card:first-child { padding-top: 0; }
+.shell-ios .project-thumb { flex: 0 0 64px; height: 64px; border-radius: 12px; font-size: 27px; }
+.shell-ios .project-body { min-width: 0; padding: 0; }
+.shell-ios .project-title { margin-bottom: 4px; font-size: 17px; }
+.shell-ios .project-desc { margin-bottom: 10px; color: #636368; font-size: 13px; }
+.shell-ios .tag { padding: 3px 7px; font-size: 10px; font-weight: 500; color: #636368; }
+.shell-ios .project-status { margin-top: 10px; color: #007aff; font-size: 12px; }
+.shell-ios .project-detail-hero { min-height: 140px; margin: 12px 0 24px; border-radius: 12px; box-shadow: none; }
+.shell-ios .project-detail-panel,
+.shell-ios .blog-post .md { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.shell-ios .project-flow { padding: 16px 0; border: 0; border-top: 1px solid var(--content-line); border-radius: 0; box-shadow: none; }
+.shell-ios .project-flow-node { border: 0; border-radius: 8px; background: var(--content-soft); }
+.shell-ios .md :is(h1, h2, h3) { color: var(--content-ink); }
+.shell-ios .md a { color: #007aff; }
+.shell-ios .link-btn { min-height: 40px; padding: 8px 0; border-radius: 0; background: none; color: #007aff; }
+.shell-ios .link-btn:hover { background: none; text-decoration: underline; }
+
+.shell-ios .post-list { gap: 0; }
+.shell-ios .post-item { padding: 18px 0; gap: 6px; }
+.shell-ios .post-title { font-size: 17px; }
+.shell-ios .post-date { font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.shell-ios .post-excerpt { font-size: 14px; color: #636368; }
+
+.shell-ios .contact-row { grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; min-height: 72px; margin: 0; padding: 14px 0; }
+.shell-ios .contact-label { color: var(--content-ink); font-size: 16px; font-weight: 500; }
+.shell-ios .contact-value { grid-column: 1; grid-row: 2; min-width: 0; max-width: none; color: #85858b; font-size: 14px; white-space: normal; overflow-wrap: anywhere; }
+.shell-ios .contact-arrow { grid-column: 2; grid-row: 1 / 3; align-self: center; color: #007aff; }
+.shell-ios .cv-button { min-height: 48px; margin-top: 24px; border: 0; border-radius: 10px; background: #f2f2f7; color: #007aff; box-shadow: none; font-weight: 500; }
+.shell-ios .cv-button:hover { background: #eaeaef; filter: none; }

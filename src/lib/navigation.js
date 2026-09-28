@@ -2,6 +2,7 @@ import { useSyncExternalStore } from 'react'
 
 const titles = {
   '/': 'Portfolio', '/about': 'About', '/projects': 'Projects',
+  '/photos': 'Photos',
   '/projects/gorleak': 'Gorleak', '/blog': 'Blog', '/contact': 'Contact',
   '/my-computer': 'My Computer', '/recycle-bin': 'Recycle Bin', '/cv': 'Résumé',
 }

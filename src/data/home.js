@@ -1,6 +1,6 @@
 import { profile } from './profile.js'
 import githubIOSIcon from '../../icons/github-ios-app-logo_svgstack_com_72691788779644.svg'
-import mailIOSIcon from '../../icons/ios-mail-app-icon_svgstack_com_6001788779615.svg'
+import { appleIcons } from './appleIcons.js'
 
 /**
  * iOS ana ekranı için harici bağlantı "uygulamaları" (launcher).
@@ -37,6 +37,6 @@ export const links = [
     letter: '✉',
     url: `mailto:${profile.email}`,
     tint: ['#4aa3ea', '#1f6fd0'],
-    iosIcon: mailIOSIcon,
+    iosIcon: appleIcons.mail,
   },
 ]

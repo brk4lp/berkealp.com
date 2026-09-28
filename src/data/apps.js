@@ -6,9 +6,9 @@ import Blog from '../apps/Blog.jsx'
 import Contact from '../apps/Contact.jsx'
 import MyComputer from '../apps/MyComputer.jsx'
 import RecycleBin from '../apps/RecycleBin.jsx'
-import notesIOSIcon from '../../icons/apple-notes-app-icon_svgstack_com_5891788779607.svg'
-import mailIOSIcon from '../../icons/ios-mail-app-icon_svgstack_com_6001788779615.svg'
-import pagesIOSIcon from '../../icons/pages-ios-app-logo_svgstack_com_71851788779651.svg'
+import Photos from '../apps/Photos.jsx'
+import XPPhotos from '../apps/XPPhotos.jsx'
+import { appleIcons } from './appleIcons.js'
 import spotifyIOSIcon from '../../icons/spotify-ios-app-icon_svgstack_com_71681788779695.svg'
 import {
   AboutGlyph,
@@ -17,15 +17,30 @@ import {
   ContactGlyph,
   MyComputerGlyph,
   RecycleBinGlyph,
+  PhotosGlyph,
 } from './icons.jsx'
 
 export const apps = [
+  {
+    id: 'photos',
+    title: 'Photos',
+    Glyph: PhotosGlyph,
+    Component: Photos,
+    iosIcon: appleIcons.photos,
+    DesktopComponent: XPPhotos,
+    desktopTitle: 'Photos - Windows Picture and Fax Viewer',
+    xpIcon: '/icons/xp/photos.svg',
+    tint: ['#ffffff', '#f2f2f7'],
+    defaultSize: { w: 760, h: 620 },
+    immersive: true,
+  },
   {
     id: 'about',
     xpIcon: '/icons/xp/about.png',
     title: 'About',
     Glyph: AboutGlyph,
     Component: About,
+    iosIcon: appleIcons.contacts,
     tint: ['#5b9bd5', '#2e6da4'],
     defaultSize: { w: 460, h: 420 },
   },
@@ -36,7 +51,7 @@ export const apps = [
     Glyph: ProjectsGlyph,
     Component: Projects,
     tint: ['#f0b429', '#b8860b'],
-    iosIcon: pagesIOSIcon,
+    iosIcon: appleIcons.pages,
     defaultSize: { w: 640, h: 500 },
   },
   {
@@ -46,7 +61,7 @@ export const apps = [
     Glyph: BlogGlyph,
     Component: Blog,
     tint: ['#9aa0a6', '#5f6368'],
-    iosIcon: notesIOSIcon,
+    iosIcon: appleIcons.notes,
     defaultSize: { w: 560, h: 500 },
   },
   {
@@ -56,7 +71,7 @@ export const apps = [
     Glyph: ContactGlyph,
     Component: Contact,
     tint: ['#56b3d6', '#2a7f9e'],
-    iosIcon: mailIOSIcon,
+    iosIcon: appleIcons.mail,
     defaultSize: { w: 440, h: 440 },
   },
   {

@@ -4,6 +4,15 @@
  * hem iOS glossy ikonu bu glyph'i farklı çerçevede kullanır.
  */
 
+export const PhotosGlyph = () => (
+  <svg viewBox="0 0 48 48" width="100%" height="100%" aria-hidden="true">
+    <rect x="1" y="1" width="46" height="46" rx="10" fill="white" />
+    {['#ffb52b', '#ff8e37', '#f45b69', '#c16ab6', '#727bd2', '#53b9da', '#69c596', '#bfd35b'].map((color, i) => (
+      <ellipse key={color} cx="24" cy="14.5" rx="6.3" ry="10" fill={color} fillOpacity=".85" transform={`rotate(${i * 45} 24 24)`} />
+    ))}
+  </svg>
+)
+
 export const AboutGlyph = () => (
   <svg viewBox="0 0 48 48" width="100%" height="100%" aria-hidden="true">
     <circle cx="24" cy="17" r="9" fill="#ffe0b2" stroke="#c98a4b" strokeWidth="1.5" />

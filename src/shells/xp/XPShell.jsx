@@ -142,12 +142,12 @@ export default function XPShell() {
       {wm.windows.map((w) => {
         const app = getApp(w.appId)
         if (!app) return null
-        const Body = app.Component
+        const Body = app.DesktopComponent || app.Component
         return (
           <Window
             key={w.id}
             win={w}
-            title={app.title}
+            title={app.desktopTitle || app.title}
             app={app}
             onClose={() => closeWin(w.id)}
             onMinimize={() => minimizeWin(w.id)}
@@ -155,7 +155,7 @@ export default function XPShell() {
             onFocus={() => { wm.focus(w.id); reveal(w.appId) }}
             onMove={(x, y) => wm.move(w.id, x, y)}
           >
-            <Body />
+            <Body active={activeId === w.id && !w.minimized} />
           </Window>
         )
       })}

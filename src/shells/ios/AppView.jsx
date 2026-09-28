@@ -1,4 +1,5 @@
 import StatusBar from './StatusBar.jsx'
+import IOSAppHeader from './IOSAppHeader.jsx'
 
 /**
  * Tam ekran iOS uygulama görünümü: durum çubuğu + başlık barı + içerik.
@@ -10,15 +11,9 @@ export default function AppView({ app, origin, onClose }) {
     ? { transformOrigin: `${origin.x}px ${origin.y}px` }
     : undefined
   return (
-    <div className="ios-appview" style={style}>
+    <div className={`ios-appview${app.immersive ? ' ios-appview-immersive' : ''}`} style={style}>
       <StatusBar dark />
-      <div className="ios-navbar">
-        <button className="ios-nav-back" onClick={onClose} aria-label="Close app">
-          <span aria-hidden="true">‹</span>
-          Home
-        </button>
-        <span className="ios-nav-title">{app.title}</span>
-      </div>
+      {!app.immersive && <IOSAppHeader title={app.title} onHome={onClose} />}
       <div className="ios-appview-body">
         <Body />
       </div>
