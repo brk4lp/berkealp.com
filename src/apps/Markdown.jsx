@@ -4,6 +4,9 @@
  * - liste öğeleri ve boş satırla ayrılmış paragraflar.
  */
 
+function safeLink(value) {
+  return /^(https?:\/\/|mailto:|\/(?!\/)|#)/i.test(value) ? value : '#'
+}
 function renderInline(text, keyPrefix) {
   // Sıra önemli: önce link, sonra kalın/italik/kod.
   const tokens = []
@@ -20,7 +23,7 @@ function renderInline(text, keyPrefix) {
     const key = `${keyPrefix}-${i++}`
     if (match[1]) {
       tokens.push(
-        <a key={key} href={match[3]} target="_blank" rel="noreferrer noopener">
+        <a key={key} href={safeLink(match[3])} target="_blank" rel="noreferrer noopener">
           {match[2]}
         </a>,
       )
@@ -47,6 +50,8 @@ export default function Markdown({ children }) {
     <div className="md">
       {blocks.map((block, bi) => {
         const trimmed = block.trim()
+        const picture = /^!\[([^\]]*)\]\(([^)]+)\)$/.exec(trimmed)
+        if (picture && /^(https?:\/\/|\/(?!\/))/i.test(picture[2])) return <figure key={bi}><img src={picture[2]} alt={picture[1]} loading="lazy" style={{maxWidth:'100%',height:'auto'}} /></figure>
 
         // Başlıklar
         const heading = /^(#{1,3})\s+(.*)$/.exec(trimmed)

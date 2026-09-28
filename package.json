@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "studio": "node scripts/studio/server.mjs",
+    "test:studio": "node --test scripts/studio/*.test.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

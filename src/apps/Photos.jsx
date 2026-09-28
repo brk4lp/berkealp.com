@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { photos } from '../data/photos.js'
+import { useContent } from '../data/ContentContext.jsx'
 import { navigate } from '../lib/navigation.js'
 import IOSAppHeader from '../shells/ios/IOSAppHeader.jsx'
 import '../styles/photos.css'
@@ -28,7 +28,7 @@ function PhotoImage({ photo, thumbnail = false, ...props }) {
   return <img src={thumbnail ? photo.thumbnail || photo.src : photo.src} alt={photo.alt || photo.title} loading={thumbnail ? 'lazy' : 'eager'} decoding="async" onError={() => setFailed(true)} draggable="false" {...props} />
 }
 
-function readFavorites() {
+function readFavorites(photos) {
   try {
     const stored = JSON.parse(localStorage.getItem('berke-photos-favorites') || '[]')
     return Array.isArray(stored) ? stored.filter((id) => photos.some((photo) => photo.id === id)) : []
@@ -91,6 +91,8 @@ function Viewer({ items, initialId, favorites, onFavorite, onClose }) {
           {photo.width && <div><dt>Original dimensions</dt><dd>{photo.width} × {photo.height}</dd></div>}
           <div><dt>Date taken</dt><dd>{dateLabel(photo) || 'Not available'}</dd></div>
           {photo.location && <div><dt>Location</dt><dd>{photo.location}</dd></div>}
+          {photo.coordinates && <div><dt>Map</dt><dd><a href={`https://www.openstreetmap.org/?mlat=${photo.coordinates.lat}&mlon=${photo.coordinates.lng}#map=15/${photo.coordinates.lat}/${photo.coordinates.lng}`} target="_blank" rel="noreferrer">View location ↗</a></dd></div>}
+          {photo.tags?.length > 0 && <div><dt>Tags</dt><dd>{photo.tags.join(', ')}</dd></div>}
         </dl>
       </section>}
       <div className="photos-filmstrip" ref={strip} aria-label="Photo thumbnails">{items.map((item, i) => <button key={item.id} aria-label={`View ${item.title}`} aria-current={i === index ? 'true' : undefined} onClick={() => change(i)}><PhotoImage photo={item} thumbnail /></button>)}</div>
@@ -105,12 +107,13 @@ function Viewer({ items, initialId, favorites, onFavorite, onClose }) {
 }
 
 export default function Photos() {
+  const { photos } = useContent()
   const [tab, setTab] = useState('library')
   const [album, setAlbum] = useState(null)
   const [query, setQuery] = useState('')
   const [grouping, setGrouping] = useState('All Photos')
   const [density, setDensity] = useState(1)
-  const [favorites, setFavorites] = useState(readFavorites)
+  const [favorites, setFavorites] = useState(() => readFavorites(photos))
   const [viewer, setViewer] = useState(null)
   const pinch = useRef(null)
   const lastOpened = useRef(null)
@@ -120,9 +123,9 @@ export default function Photos() {
     try { localStorage.setItem('berke-photos-favorites', JSON.stringify(next)) } catch { /* Session-only when storage is unavailable. */ }
     return next
   })
-  const albums = useMemo(() => ['All Photos', 'Favorites', ...new Set(photos.map((photo) => photo.album || 'Camera Roll'))], [])
+  const albums = useMemo(() => ['All Photos', 'Favorites', ...new Set(photos.map((photo) => photo.album || 'Camera Roll'))], [photos])
   const albumPhotos = (name) => name === 'All Photos' ? photos : name === 'Favorites' ? photos.filter((photo) => favorites.includes(photo.id)) : photos.filter((photo) => (photo.album || 'Camera Roll') === name)
-  const visible = (album ? albumPhotos(album) : photos).filter((photo) => tab !== 'search' || `${photo.title} ${photo.alt || ''} ${photo.location || ''} ${photo.album || ''} ${photo.date || ''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()))
+  const visible = (album ? albumPhotos(album) : photos).filter((photo) => tab !== 'search' || `${photo.title} ${photo.alt || ''} ${photo.location || ''} ${photo.album || ''} ${photo.date || ''} ${(photo.tags || []).join(' ')}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()))
   const groups = new Map()
   for (const photo of visible) {
     const key = grouping === 'All Photos' || tab !== 'library' ? '' : dateLabel(photo, grouping === 'Years' ? { year: 'numeric' } : { year: 'numeric', month: 'long' }) || 'Undated'

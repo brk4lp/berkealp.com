@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { photos } from '../data/photos.js'
+import { useContent } from '../data/ContentContext.jsx'
 import '../styles/xp-photos.css'
 
 // Small, colored toolbar glyphs match the surrounding XP shell.
@@ -27,6 +27,7 @@ function ToolButton({ label, icon, ...props }) {
 }
 
 export default function XPPhotos({ active = true }) {
+  const { photos } = useContent()
   const [index, setIndex] = useState(0)
   const [zoom, setZoom] = useState(null)
   const [rotation, setRotation] = useState(0)
@@ -51,7 +52,7 @@ export default function XPPhotos({ active = true }) {
     if (!photos.length) return
     setIndex((current) => (current + delta + photos.length) % photos.length)
     resetView()
-  }, [resetView])
+  }, [resetView, photos.length])
 
   useEffect(() => {
     const element = stage.current

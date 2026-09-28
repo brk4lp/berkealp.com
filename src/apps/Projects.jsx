@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navigate, usePath } from '../lib/navigation.js'
-import { projects } from '../data/projects.js'
+import { useContent } from '../data/ContentContext.jsx'
 import { outboundHref } from '../data/outbound.js'
 import Markdown from './Markdown.jsx'
 import GorleakDiagram from './GorleakDiagrams.jsx'
@@ -24,10 +24,11 @@ function splitGorleakCaseStudy(details) {
 }
 
 export default function Projects() {
+  const { projects } = useContent()
   const path = usePath()
-  const [activeId, setActiveId] = useState(path === '/projects/gorleak' ? 'gorleak' : null)
+  const [activeId, setActiveId] = useState(path.split('/')[2] || null)
   useEffect(() => {
-    if (path === '/projects' || path === '/projects/gorleak') setActiveId(path === '/projects/gorleak' ? 'gorleak' : null)
+    if (path.startsWith('/projects')) setActiveId(path.split('/')[2] || null)
   }, [path])
   const active = projects.find((project) => project.id === activeId)
   const gorleakSections = active?.id === 'gorleak'
@@ -46,7 +47,7 @@ export default function Projects() {
             background: `linear-gradient(135deg, ${active.color[0]}, ${active.color[1]})`,
           }}
         >
-          <span>{active.title.charAt(0)}</span>
+          {active.cover ? <img className="project-cover" src={active.cover} alt="" /> : <span>{active.title.charAt(0)}</span>}
           <strong>{active.title}</strong>
         </div>
         {gorleakSections ? (
@@ -94,7 +95,7 @@ export default function Projects() {
               }}
               aria-hidden="true"
             >
-              {p.title.charAt(0)}
+              {p.cover ? <img className="project-cover" src={p.cover} alt="" /> : p.title.charAt(0)}
             </div>
             <div className="project-body">
               <h3 className="project-title">{p.title}</h3>

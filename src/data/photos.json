@@ -150,13 +150,73 @@
     "alt": "Friends sitting on a low wall outdoors at night, with numbered green person outlines and pixelated faces."
   },
   {
-    "id": "6fafc1f64349fc65",
-    "title": "Photo 16",
+    "id": "f8225f505fa344af",
+    "title": "Photo 17",
     "album": "Camera Roll",
-    "src": "/photos/6fafc1f64349fc65-labels-fa88e7e1109f.webp",
-    "thumbnail": "/photos/6fafc1f64349fc65-labels-fa88e7e1109f-thumb.webp",
-    "width": 1536,
-    "height": 2048,
-    "alt": "A close-up portrait beside a lit city square at night, with numbered green person outlines and pixelated faces."
+    "src": "/photos/f8225f505fa344af.webp",
+    "thumbnail": "/photos/f8225f505fa344af-thumb.webp",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Two people seated at a sunny cafe terrace, with numbered green person outlines and pixelated faces."
+  },
+  {
+    "id": "364d36fdf8673e04",
+    "title": "Photo 18",
+    "album": "Camera Roll",
+    "src": "/photos/364d36fdf8673e04.webp",
+    "thumbnail": "/photos/364d36fdf8673e04-thumb.webp",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Friends gathered around an outdoor table at night, with numbered green person outlines and face mosaics."
+  },
+  {
+    "id": "c5f715ff8b0b1cba",
+    "title": "Photo 19",
+    "album": "Camera Roll",
+    "src": "/photos/c5f715ff8b0b1cba.webp",
+    "thumbnail": "/photos/c5f715ff8b0b1cba-thumb.webp",
+    "width": 1600,
+    "height": 1200,
+    "alt": "Two people walking across a temple courtyard, with numbered green person outlines and pixelated faces."
+  },
+  {
+    "id": "48d6670706f21e38",
+    "title": "Photo 20",
+    "album": "Camera Roll",
+    "src": "/photos/48d6670706f21e38.webp",
+    "thumbnail": "/photos/48d6670706f21e38-thumb.webp",
+    "width": 1170,
+    "height": 1560,
+    "alt": "A group gathered in a living room, with numbered green person outlines and face mosaics."
+  },
+  {
+    "id": "91305275f2f63242",
+    "title": "Photo 22",
+    "album": "Camera Roll",
+    "src": "/photos/91305275f2f63242.webp",
+    "thumbnail": "/photos/91305275f2f63242-thumb.webp",
+    "width": 1200,
+    "height": 1600,
+    "alt": "A person standing in front of a colorful street mural at night, with a numbered green person outline."
+  },
+  {
+    "id": "971aadbda31a6881",
+    "title": "Photo 23",
+    "album": "Camera Roll",
+    "src": "/photos/971aadbda31a6881.webp",
+    "thumbnail": "/photos/971aadbda31a6881-thumb.webp",
+    "width": 1125,
+    "height": 2000,
+    "alt": "Three people talking beside a railing outdoors, with numbered green person outlines and face mosaics."
+  },
+  {
+    "id": "82707b6214e3ecb7",
+    "title": "Photo 24",
+    "album": "Camera Roll",
+    "src": "/photos/82707b6214e3ecb7.webp",
+    "thumbnail": "/photos/82707b6214e3ecb7-thumb.webp",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Two people standing behind a dining table, with numbered green person outlines and a face mosaic."
   }
 ]

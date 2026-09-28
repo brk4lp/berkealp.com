@@ -15,6 +15,7 @@ from PIL import Image, ImageOps
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('source', type=Path)
 parser.add_argument('--person-labels', action='store_true')
+parser.add_argument('--append', action='store_true', help='Keep the current collection and skip photos already imported')
 args = parser.parse_args()
 if args.person_labels:
     import numpy as np
@@ -26,9 +27,13 @@ destination = root / 'public' / 'photos'
 destination.mkdir(parents=True, exist_ok=True)
 manifest = root / 'src' / 'data' / 'photos.json'
 previous = {item['id']: item for item in json.loads(manifest.read_text('utf-8'))} if manifest.exists() else {}
-photos = []
-seen = set()
-for number, source in enumerate(sorted(args.source.glob('*.png')), 1):
+photos = list(previous.values()) if args.append else []
+seen = set(previous) if args.append else set()
+sources = sorted(args.source.glob('*.png'))
+if not sources:
+    raise SystemExit('No PNG files found; existing collection was not changed.')
+imported = 0
+for number, source in enumerate(sources, 1):
     identity = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
     if identity in seen:
         continue
@@ -65,12 +70,12 @@ for number, source in enumerate(sorted(args.source.glob('*.png')), 1):
         thumbnail = image.copy()
         thumbnail.thumbnail((560, 560), Image.Resampling.LANCZOS)
         thumbnail.save(destination / f'{asset_name}-thumb.webp', quality=85, method=6)
-    item = previous.get(identity, {'id': identity, 'title': f'Photo {number:02d}', 'album': 'Camera Roll'})
+    photo_number = len(photos) + 1 if args.append else number
+    item = previous.get(identity, {'id': identity, 'title': f'Photo {photo_number:02d}', 'album': 'Camera Roll'})
     item.update(src=f'/photos/{asset_name}.webp', thumbnail=f'/photos/{asset_name}-thumb.webp', width=width, height=height)
     if args.person_labels and 'alt' in item:
         item['alt'] = item['alt'].replace('with green person outlines', 'with numbered green person outlines')
     photos.append(item)
-if not photos:
-    raise SystemExit('No PNG files found; existing collection was not changed.')
+    imported += 1
 manifest.write_text(json.dumps(photos, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-print(f'Imported {len(photos)} photos; source files untouched.')
+print(f'Imported {imported} photos; collection contains {len(photos)} photos; source files untouched.')

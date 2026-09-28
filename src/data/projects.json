@@ -1,0 +1,68 @@
+[
+  {
+    "id": "tiny11-gui",
+    "title": "Tiny11 GUI",
+    "description": "I built a Windows desktop app that makes it easier to create a lighter, customized Windows 11 ISO.",
+    "tags": [
+      "C#",
+      ".NET 8",
+      "WPF",
+      "PowerShell",
+      "DISM"
+    ],
+    "url": "https://github.com/brk4lp/Tiny11-GUI",
+    "color": [
+      "#512bd4",
+      "#137bd1"
+    ]
+  },
+  {
+    "id": "gorleak",
+    "title": "Gorleak",
+    "description": "I built a daily monitoring tool after finding an exposed media directory connected to a suspicious online marketplace.",
+    "tags": [
+      "SQLite",
+      "Automation",
+      "Web Monitoring",
+      "OSINT"
+    ],
+    "status": "Private case study",
+    "color": [
+      "#20242c",
+      "#c44536"
+    ],
+    "details": "# Gorleak\n\nI came across a Telegram bot selling suspicious digital products. The bot redirected each user to a separate storefront linked to their Telegram ID, while visiting the main website directly returned a 403 response.\n\nI used dirsearch to enumerate the site's accessible paths and found that the `/media//` directory returned a 200 response. Opening it revealed randomly named images related to the listed products. Most of the information was already activated or unusable, but the exposed directory itself was still a serious security problem.\n\n## What I built\n\nI built Gorleak to monitor that directory automatically. The tool runs once a day, checks the available filenames and compares them with the records already stored in SQLite.\n\nWhen it discovers a filename that is not in the database, it:\n\n- creates a folder named after the scan date\n- saves the newly discovered image in that folder\n- records the filename and discovery date in SQLite\n- skips files that were already seen in earlier scans\n\nThis gave me a simple timeline of when new files appeared without processing the same items again.\n\n## What I learned\n\n- building repeatable and idempotent scheduled jobs\n- using SQLite for lightweight historical tracking\n- comparing new scan results with existing records\n- organizing collected files by discovery date\n- handling exposed data carefully and documenting security findings responsibly\n\nI kept this as a private case study and did not publish or redistribute the exposed data."
+  },
+  {
+    "id": "adapos",
+    "title": "AdaPOS",
+    "description": "I built a restaurant management app with Flutter and Firebase for tables, menus, orders and payment tracking, with real-time data sync, staff management and sales reports.",
+    "tags": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Firestore"
+    ],
+    "status": "View project files",
+    "url": "https://drive.google.com/drive/folders/1qyLYlMFZs1EiKW1w8y9pikfIe0_rtIJ8?usp=sharing",
+    "color": [
+      "#087f8c",
+      "#13556b"
+    ]
+  },
+  {
+    "id": "detay-folder-script",
+    "title": "Photo Studio Folder Script",
+    "description": "I wrote this small Python script to create each day's photographer and side-photo folders automatically.",
+    "tags": [
+      "Python",
+      "File Automation",
+      "Photo Studio"
+    ],
+    "url": "https://github.com/brk4lp/detayFolderScript",
+    "color": [
+      "#3776ab",
+      "#ffd343"
+    ]
+  }
+]
